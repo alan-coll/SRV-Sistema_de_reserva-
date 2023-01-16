@@ -61,7 +61,6 @@ type
     FDQryReservaEMAIL: TStringField;
     Label8: TLabel;
     DBEdtEmail: TDBEdit;
-    DBEdtMarca_veiculo: TDBEdit;
     IdSMTP: TIdSMTP;
     IdMessage: TIdMessage;
     IdSSLIOHandlerSocketOpenSSL: TIdSSLIOHandlerSocketOpenSSL;
@@ -71,7 +70,9 @@ type
     DBEdtNecessarios: TDBEdit;
     FDQryReservaMOTIVO_RESERVA: TStringField;
     DBMotivo_Rsv: TDBEdit;
+    DBComboBox1: TDBComboBox;
     procedure BtnGravarClick(Sender: TObject);
+    procedure DBComboBox1Change(Sender: TObject);
 
   private
     { Private declarations }
@@ -102,7 +103,7 @@ begin
   inherited;
   // Instaciando variaveis para o E-mail
   Motivo := DBMotivo_Rsv.Text;
-  Marca := DBEdtMarca_veiculo.Text;
+  Marca := DBComboBox1.Text;
   Data := cxDBDate_rsv.Text;
   HoraInicio := cxDBTimeRsv.Text;
   HoraFim := cxDBTimeFimRsv.Text;
@@ -176,5 +177,14 @@ begin
 end;
 
 
+
+procedure TFormReserva.DBComboBox1Change(Sender: TObject);
+VAR i:Integer;
+Marca:string;
+begin
+  inherited;
+   i:= DBComboBox1.ItemIndex;
+   Marca:= DBComboBox1.Items.Strings[i];
+end;
 
 end.

@@ -1,8 +1,8 @@
 inherited FormReserva: TFormReserva
   Caption = 'Reservas'
   ClientHeight = 261
-  ClientWidth = 535
-  ExplicitWidth = 551
+  ClientWidth = 574
+  ExplicitWidth = 590
   ExplicitHeight = 300
   PixelsPerInch = 96
   TextHeight = 13
@@ -71,8 +71,8 @@ inherited FormReserva: TFormReserva
     Caption = 'Necessarios'
   end
   inherited Pn1: TPanel
-    Width = 535
-    ExplicitWidth = 527
+    Width = 574
+    ExplicitWidth = 574
     inherited BtnGravar: TButton
       OnClick = BtnGravarClick
     end
@@ -131,32 +131,36 @@ inherited FormReserva: TFormReserva
     DataSource = DsReserva
     TabOrder = 6
   end
-  object DBEdtMarca_veiculo: TDBEdit [16]
-    Left = 402
-    Top = 229
-    Width = 115
-    Height = 21
-    DataField = 'MARCA_VEICULO'
-    DataSource = DsReserva
-    TabOrder = 7
-  end
-  object DBEdtNecessarios: TDBEdit [17]
+  object DBEdtNecessarios: TDBEdit [16]
     Left = 8
     Top = 184
     Width = 253
     Height = 21
     DataField = 'NECESSARIOS'
     DataSource = DsReserva
-    TabOrder = 8
+    TabOrder = 7
   end
-  object DBMotivo_Rsv: TDBEdit [18]
+  object DBMotivo_Rsv: TDBEdit [17]
     Left = 267
     Top = 136
     Width = 253
     Height = 21
     DataField = 'MOTIVO_RESERVA'
     DataSource = DsReserva
+    TabOrder = 8
+  end
+  object DBComboBox1: TDBComboBox [18]
+    Left = 402
+    Top = 229
+    Width = 118
+    Height = 21
+    DataField = 'MARCA_VEICULO'
+    DataSource = DsReserva
+    Items.Strings = (
+      'MARCH'
+      'SANDERO')
     TabOrder = 9
+    OnChange = DBComboBox1Change
   end
   inherited FDQryReserva: TFDQuery
     SQL.Strings = (

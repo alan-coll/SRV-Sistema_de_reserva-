@@ -8,6 +8,9 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, UformFzReserva, uBiblioteca,
   uFpPrincipal;
 
+const
+ Versão='Reserva manager SRV'#1#0#0#0'Alan Silva'#1#0'V1.0 16/01/2023';
+ //1.Melhoria, Colocado um comboBox para a lista de veiculos.v1.1;
 type
   TFormMain = class(TForm)
     MainMenu1: TMainMenu;
