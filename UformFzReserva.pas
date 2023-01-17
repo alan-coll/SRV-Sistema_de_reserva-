@@ -10,33 +10,12 @@ uses
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.Client, Data.DB, FireDAC.Comp.DataSet, Vcl.StdCtrls,
   Vcl.ExtCtrls,
-  UdmReserva, Vcl.DBCtrls, Vcl.Mask, uBiblioteca, cxGraphics, cxControls,
-  cxLookAndFeels, cxLookAndFeelPainters, cxContainer, cxEdit, dxSkinsCore,
-  dxSkinBasic, dxSkinBlack, dxSkinBlue, dxSkinBlueprint, dxSkinCaramel,
-  dxSkinCoffee, dxSkinDarkroom, dxSkinDarkSide, dxSkinDevExpressDarkStyle,
-  dxSkinDevExpressStyle, dxSkinFoggy, dxSkinGlassOceans, dxSkinHighContrast,
-  dxSkiniMaginary, dxSkinLilian, dxSkinLiquidSky, dxSkinLondonLiquidSky,
-  dxSkinMcSkin, dxSkinMetropolis, dxSkinMetropolisDark, dxSkinMoneyTwins,
-  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
-  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
-  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinOffice2013DarkGray,
-  dxSkinOffice2013LightGray, dxSkinOffice2013White, dxSkinOffice2016Colorful,
-  dxSkinOffice2016Dark, dxSkinOffice2019Black, dxSkinOffice2019Colorful,
-  dxSkinOffice2019DarkGray, dxSkinOffice2019White, dxSkinPumpkin, dxSkinSeven,
-  dxSkinSevenClassic, dxSkinSharp, dxSkinSharpPlus, dxSkinSilver,
-  dxSkinSpringtime, dxSkinStardust, dxSkinSummer2008, dxSkinTheAsphaltWorld,
-  dxSkinTheBezier, dxSkinsDefaultPainters, dxSkinValentine,
-  dxSkinVisualStudio2013Blue, dxSkinVisualStudio2013Dark,
-  dxSkinVisualStudio2013Light, dxSkinVS2010, dxSkinWhiteprint,
-  dxSkinXmas2008Blue, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxCalendar,
-  cxDBEdit, cxSpinEdit, cxTimeEdit, Data.Bind.EngExt, Vcl.Bind.DBEngExt,
+  UdmReserva, Vcl.DBCtrls, Vcl.Mask, uBiblioteca, Data.Bind.EngExt, Vcl.Bind.DBEngExt,
   System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, IdBaseComponent, IdComponent, IdUDPBase, IdUDPClient,
   IdSNMP, IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase,
-  IdMessageClient, IdSMTPBase, IdSMTP, dxWheelPicker, dxNumericWheelPicker,
-  dxDateTimeWheelPicker, dxDBDateTimeWheelPicker, Vcl.ComCtrls, IdIOHandler,
-  IdIOHandlerSocket, IdIOHandlerStack, IdSSL,
-  IdSSLOpenSSL, IdMessage, Datasnap.Provider, Vcl.Grids, Vcl.DBGrids;
+  IdMessageClient, IdSMTPBase, IdSMTP,  Datasnap.Provider, IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL,
+  IdSSLOpenSSL, IdMessage, Vcl.WinXPickers, Vcl.ComCtrls,Vcl.Grids, Vcl.DBGrids;
 
 type
   TFormReserva = class(TFormPrincipal)
@@ -53,11 +32,8 @@ type
     Label6: TLabel;
     DBId_RSV: TDBEdit;
     DBNomeSolici: TDBEdit;
-    cxDBDate_rsv: TcxDBDateEdit;
-    cxDBTimeRsv: TcxDBTimeEdit;
     FDQryReservaHORA_FIM_RESERVA: TTimeField;
     Label7: TLabel;
-    cxDBTimeFimRsv: TcxDBTimeEdit;
     FDQryReservaEMAIL: TStringField;
     Label8: TLabel;
     DBEdtEmail: TDBEdit;
@@ -71,6 +47,9 @@ type
     FDQryReservaMOTIVO_RESERVA: TStringField;
     DBMotivo_Rsv: TDBEdit;
     DBComboBox1: TDBComboBox;
+    TimePicker1: TTimePicker;
+    TimePicker2: TTimePicker;
+    DateTimePicker1: TDateTimePicker;
     procedure BtnGravarClick(Sender: TObject);
     procedure DBComboBox1Change(Sender: TObject);
 
@@ -97,6 +76,7 @@ Var
   Lsocketssl:                       TIdSSLIOHandlerSocketOpenSSL;
   Motivo, Marca, Necessario, Email: string;
   Data, HoraInicio, HoraFim:        string;
+  Date, Hora_Inicio, Hora_Fim:      TDateTime;
 
 begin
 
@@ -104,9 +84,13 @@ begin
   // Instaciando variaveis para o E-mail
   Motivo := DBMotivo_Rsv.Text;
   Marca := DBComboBox1.Text;
-  Data := cxDBDate_rsv.Text;
-  HoraInicio := cxDBTimeRsv.Text;
-  HoraFim := cxDBTimeFimRsv.Text;
+  //Data := cxDBDate_rsv.Text;
+  Date:=DateTimePicker1.Date;
+  Data:=DateToStr(Date);
+  Hora_Inicio := TimePicker1.Time;
+  HoraInicio:=TimeToStr(Hora_Inicio);
+  Hora_fim := TimePicker2.Time;
+  HoraFim:=TimeToStr(Hora_Fim);
   Necessario := DBEdtNecessarios.Text;
   Email := DBEdtEmail.Text;
 

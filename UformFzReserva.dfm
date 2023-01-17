@@ -1,9 +1,9 @@
 inherited FormReserva: TFormReserva
   Caption = 'Reservas'
-  ClientHeight = 261
-  ClientWidth = 574
-  ExplicitWidth = 590
-  ExplicitHeight = 300
+  ClientHeight = 280
+  ClientWidth = 546
+  ExplicitWidth = 562
+  ExplicitHeight = 319
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel [0]
@@ -21,7 +21,7 @@ inherited FormReserva: TFormReserva
     Caption = 'ID_RESERVA'
   end
   object Label3: TLabel [2]
-    Left = 267
+    Left = 275
     Top = 117
     Width = 32
     Height = 13
@@ -29,28 +29,28 @@ inherited FormReserva: TFormReserva
   end
   object Label4: TLabel [3]
     Left = 8
-    Top = 211
+    Top = 210
     Width = 108
     Height = 13
     Caption = 'Data do Agendamento'
   end
   object Label5: TLabel [4]
     Left = 130
-    Top = 211
+    Top = 210
     Width = 119
     Height = 13
     Caption = 'Hora inicio Agendamento'
   end
   object Label6: TLabel [5]
-    Left = 402
+    Left = 410
     Top = 210
     Width = 78
     Height = 13
     Caption = 'Lista de Veiculos'
   end
   object Label7: TLabel [6]
-    Left = 267
-    Top = 211
+    Left = 275
+    Top = 210
     Width = 112
     Height = 13
     Caption = 'Hora Fim Agendamento'
@@ -71,8 +71,8 @@ inherited FormReserva: TFormReserva
     Caption = 'Necessarios'
   end
   inherited Pn1: TPanel
-    Width = 574
-    ExplicitWidth = 574
+    Width = 546
+    ExplicitWidth = 546
     inherited BtnGravar: TButton
       OnClick = BtnGravarClick
     end
@@ -98,69 +98,86 @@ inherited FormReserva: TFormReserva
     DataSource = DsReserva
     TabOrder = 2
   end
-  object cxDBDate_rsv: TcxDBDateEdit [12]
-    Left = 8
-    Top = 230
-    DataBinding.DataField = 'DATA_RESERVA'
-    DataBinding.DataSource = DsReserva
-    TabOrder = 3
-    Width = 109
-  end
-  object cxDBTimeRsv: TcxDBTimeEdit [13]
-    Left = 130
-    Top = 230
-    DataBinding.DataField = 'HORA_RESERVA'
-    DataBinding.DataSource = DsReserva
-    TabOrder = 4
-    Width = 131
-  end
-  object cxDBTimeFimRsv: TcxDBTimeEdit [14]
-    Left = 269
-    Top = 229
-    DataBinding.DataField = 'HORA_FIM_RESERVA'
-    DataBinding.DataSource = DsReserva
-    TabOrder = 5
-    Width = 127
-  end
-  object DBEdtEmail: TDBEdit [15]
-    Left = 267
+  object DBEdtEmail: TDBEdit [12]
+    Left = 275
     Top = 184
     Width = 253
     Height = 21
     DataField = 'EMAIL'
     DataSource = DsReserva
-    TabOrder = 6
+    TabOrder = 3
   end
-  object DBEdtNecessarios: TDBEdit [16]
+  object DBEdtNecessarios: TDBEdit [13]
     Left = 8
     Top = 184
     Width = 253
     Height = 21
     DataField = 'NECESSARIOS'
     DataSource = DsReserva
-    TabOrder = 7
+    TabOrder = 4
   end
-  object DBMotivo_Rsv: TDBEdit [17]
-    Left = 267
+  object DBMotivo_Rsv: TDBEdit [14]
+    Left = 275
     Top = 136
     Width = 253
     Height = 21
     DataField = 'MOTIVO_RESERVA'
     DataSource = DsReserva
-    TabOrder = 8
+    TabOrder = 5
   end
-  object DBComboBox1: TDBComboBox [18]
-    Left = 402
+  object DBComboBox1: TDBComboBox [15]
+    Left = 410
     Top = 229
     Width = 118
     Height = 21
     DataField = 'MARCA_VEICULO'
     DataSource = DsReserva
     Items.Strings = (
-      'MARCH'
-      'SANDERO')
-    TabOrder = 9
+      'March'
+      'Sandeiro'
+      'Partner'
+      'Celta'
+      'Partner CET'
+      'HR')
+    TabOrder = 6
     OnChange = DBComboBox1Change
+  end
+  object TimePicker1: TTimePicker [16]
+    Left = 130
+    Top = 229
+    Width = 131
+    Height = 21
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    TabOrder = 7
+    Time = 44943.301705752320000000
+    TimeFormat = 'hh:mm'
+  end
+  object TimePicker2: TTimePicker [17]
+    Left = 275
+    Top = 229
+    Width = 112
+    Height = 21
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    TabOrder = 8
+    Time = 0.302083333333333300
+    TimeFormat = 'hh:mm'
+  end
+  object DateTimePicker1: TDateTimePicker [18]
+    Left = 8
+    Top = 229
+    Width = 108
+    Height = 21
+    Date = 44943.000000000000000000
+    Time = 0.581408333331637600
+    TabOrder = 9
   end
   inherited FDQryReserva: TFDQuery
     SQL.Strings = (
@@ -230,6 +247,8 @@ inherited FormReserva: TFormReserva
     Top = 264
   end
   inherited FDQryPesquisa: TFDQuery
+    MasterSource = DsReserva
+    UpdateTransaction = FDTransaction
     Left = 1040
     Top = 208
   end

@@ -9,8 +9,10 @@ uses
   uFpPrincipal;
 
 const
- Versão='Reserva manager SRV'#1#0#0#0'Alan Silva'#1#0'V1.0 16/01/2023';
- //1.Melhoria, Colocado um comboBox para a lista de veiculos.v1.1;
+ Versão='Reserva manager SRV'#1#0#0#0'Alan Silva'#1#0'V2.1 16/01/2023';
+ //1 Melhoria, Colocado um comboBox para a lista de veiculos.v1.1.0.0;
+ //2 Correção bug Ajustado erro ao relizar processo de validar se o agendamento existe ou não.v1.2.0.0
+ //3 Retirado o componentes relacionados ao devexpress, por causa de erro no licenciamento v2.1.0.0
 type
   TFormMain = class(TForm)
     MainMenu1: TMainMenu;
