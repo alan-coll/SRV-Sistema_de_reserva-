@@ -10,12 +10,15 @@ uses
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.Client, Data.DB, FireDAC.Comp.DataSet, Vcl.StdCtrls,
   Vcl.ExtCtrls,
-  UdmReserva, Vcl.DBCtrls, Vcl.Mask, uBiblioteca, Data.Bind.EngExt, Vcl.Bind.DBEngExt,
+  UdmReserva, Vcl.DBCtrls, Vcl.Mask, uBiblioteca, Data.Bind.EngExt,
+  Vcl.Bind.DBEngExt,
   System.Rtti, System.Bindings.Outputs, Vcl.Bind.Editors, Data.Bind.Components,
   Data.Bind.DBScope, IdBaseComponent, IdComponent, IdUDPBase, IdUDPClient,
   IdSNMP, IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase,
-  IdMessageClient, IdSMTPBase, IdSMTP,  Datasnap.Provider, IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL,
-  IdSSLOpenSSL, IdMessage, Vcl.WinXPickers, Vcl.ComCtrls,Vcl.Grids, Vcl.DBGrids;
+  IdMessageClient, IdSMTPBase, IdSMTP, Datasnap.Provider, IdIOHandler,
+  IdIOHandlerSocket, IdIOHandlerStack, IdSSL,
+  IdSSLOpenSSL, IdMessage, Vcl.WinXPickers, Vcl.ComCtrls, Vcl.Grids,
+  Vcl.DBGrids;
 
 type
   TFormReserva = class(TFormPrincipal)
@@ -52,6 +55,7 @@ type
     DateTimePicker1: TDateTimePicker;
     procedure BtnGravarClick(Sender: TObject);
     procedure DBComboBox1Change(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
   private
     { Private declarations }
@@ -61,22 +65,22 @@ type
 
 var
   FormReserva: TFormReserva;
+  listas_Email: TStringList;
 
 implementation
 
 {$R *.dfm}
 
-
-
 procedure TFormReserva.BtnGravarClick(Sender: TObject);
 Var
   // Variaveis para o E-mail
-  IdSMTP:                           TIdSMTP;
-  IdMessage:                        TIdMessage;
-  Lsocketssl:                       TIdSSLIOHandlerSocketOpenSSL;
+  I: Integer;
+  IdSMTP: TIdSMTP;
+  IdMessage: TIdMessage;
+  Lsocketssl: TIdSSLIOHandlerSocketOpenSSL;
   Motivo, Marca, Necessario, Email: string;
-  Data, HoraInicio, HoraFim:        string;
-  Date, Hora_Inicio, Hora_Fim:      TDateTime;
+  Data, HoraInicio, HoraFim: string;
+  Date, Hora_Inicio, Hora_Fim: TDateTime;
 
 begin
 
@@ -84,21 +88,21 @@ begin
   // Instaciando variaveis para o E-mail
   Motivo := DBMotivo_Rsv.Text;
   Marca := DBComboBox1.Text;
-  //Data := cxDBDate_rsv.Text;
-  Date:=DateTimePicker1.Date;
-  Data:=DateToStr(Date);
+  // Data := cxDBDate_rsv.Text;
+  Date := DateTimePicker1.Date;
+  Data := DateToStr(Date);
   Hora_Inicio := TimePicker1.Time;
-  HoraInicio:=TimeToStr(Hora_Inicio);
-  Hora_fim := TimePicker2.Time;
-  HoraFim:=TimeToStr(Hora_Fim);
+  HoraInicio := TimeToStr(Hora_Inicio);
+  Hora_Fim := TimePicker2.Time;
+  HoraFim := TimeToStr(Hora_Fim);
   Necessario := DBEdtNecessarios.Text;
   Email := DBEdtEmail.Text;
 
-  IdSMTP    :=     TIdSMTP.Create(Self);
-  IdMessage :=     TIdMessage.Create(Self);
-  Lsocketssl:=     TIdSSLIOHandlerSocketOpenSSL.Create(Self);
+  IdSMTP := TIdSMTP.Create(Self);
+  IdMessage := TIdMessage.Create(Self);
+  Lsocketssl := TIdSSLIOHandlerSocketOpenSSL.Create(Self);
 
-//parametros para segurança do enviar e-mail;
+  // parametros para segurança do enviar e-mail;
   with Lsocketssl do
   begin
     with SSLOptions do
@@ -130,10 +134,14 @@ begin
     IdMessage.Body.Add('Motivo:   ' + Motivo);
     IdMessage.Body.Add('Necessarios: ' + Necessario);
     IdMessage.Body.Add('Data e Hora do Agendamento:  ' + Data + '  ' +
-    HoraInicio + ' ' + 'a' + ' ' + HoraFim);
+      HoraInicio + ' ' + 'a' + ' ' + HoraFim);
     IdMessage.Body.Add('Veiculo:  ' + Marca + ' ');
-    IdMessage.Recipients.Add.Text := 'alan.nygga@gmail.com';
-    IdMessage.Recipients.Add.Text := Email;
+
+  // parametros para a lista de e-mai;
+    IdMessage.Recipients.Add;
+    IdMessage.Recipients.EMailAddresses :=DBEdtEmail.Text;
+    IdMessage.BccList.EMailAddresses := DBEdtEmail.Text;
+
   end;
   // SMTP CONNECT
   try
@@ -142,7 +150,7 @@ begin
     IdSMTP.Authenticate;
     MessageDlg('Mensagem enviada com sucesso!', mtInformation, [mbOK], 0);
     Close;
-//SMTP EXCEPTION CASO DER ERRO;
+    // SMTP EXCEPTION CASO DER ERRO;
   except
     On E: Exception do
     begin
@@ -152,23 +160,29 @@ begin
     end;
 
   end;
-//DESCONECTANDO E LIMPANDO E-MAIL DA MEMORIA.
+  // DESCONECTANDO E LIMPANDO E-MAIL DA MEMORIA.
   IdSMTP.Disconnect;
   FreeAndNil(IdMessage);
   FreeAndNil(IdSMTP);
   FreeAndNil(IdSSLIOHandlerSocketOpenSSL);
+  abort;
   Close;
 end;
 
-
-
 procedure TFormReserva.DBComboBox1Change(Sender: TObject);
-VAR i:Integer;
-Marca:string;
+VAR
+  I: Integer;
+  Marca: string;
 begin
   inherited;
-   i:= DBComboBox1.ItemIndex;
-   Marca:= DBComboBox1.Items.Strings[i];
+  I := DBComboBox1.ItemIndex;
+  Marca := DBComboBox1.Items.Strings[I];
+end;
+
+procedure TFormReserva.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+  listas_Email.Free;
 end;
 
 end.

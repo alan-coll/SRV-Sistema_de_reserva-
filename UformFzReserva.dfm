@@ -1,9 +1,10 @@
 inherited FormReserva: TFormReserva
   Caption = 'Reservas'
-  ClientHeight = 280
-  ClientWidth = 546
-  ExplicitWidth = 562
-  ExplicitHeight = 319
+  ClientHeight = 267
+  ClientWidth = 575
+  OnClose = FormClose
+  ExplicitWidth = 591
+  ExplicitHeight = 306
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel [0]
@@ -71,8 +72,8 @@ inherited FormReserva: TFormReserva
     Caption = 'Necessarios'
   end
   inherited Pn1: TPanel
-    Width = 546
-    ExplicitWidth = 546
+    Width = 575
+    ExplicitWidth = 575
     inherited BtnGravar: TButton
       OnClick = BtnGravarClick
     end
@@ -100,7 +101,7 @@ inherited FormReserva: TFormReserva
   end
   object DBEdtEmail: TDBEdit [12]
     Left = 275
-    Top = 184
+    Top = 183
     Width = 253
     Height = 21
     DataField = 'EMAIL'
@@ -153,7 +154,7 @@ inherited FormReserva: TFormReserva
     Font.Name = 'Segoe UI'
     Font.Style = []
     TabOrder = 7
-    Time = 44943.301705752320000000
+    Time = 0.301388888888888900
     TimeFormat = 'hh:mm'
   end
   object TimePicker2: TTimePicker [17]

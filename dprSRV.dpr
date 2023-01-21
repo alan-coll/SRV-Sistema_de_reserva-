@@ -14,10 +14,12 @@ uses
 
 begin
   Application.Initialize;
-  Application.MainFormOnTaskbar := True;
+  Application.MainFormOnTaskBar := True;
   Application.CreateForm(TFormMain, FormMain);
   Application.CreateForm(TConfig_bd, Config_bd);
   Application.CreateForm(TDmReserva, DmReserva);
   Application.Run;
 
 end.
+
+

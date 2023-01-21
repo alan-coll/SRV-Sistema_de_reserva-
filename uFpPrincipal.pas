@@ -55,25 +55,23 @@ begin
 
 end;
 
-
-
 // Função Gravar no banco
 procedure TFormPrincipal.BtnGravarClick(Sender: TObject);
 var
   hora, horafim, Data: string;
   marca: string;
   //
-  Date:  TDate;
-  Hora_Inicio, Hora_Fim:TDateTime ;
+  // Date:  TDate;
+
 begin
   marca := FormReserva.DBComboBox1.Text;
-// Data := FormReserva.cxDBDate_rsv.Text;
- FormReserva.FDQryReservaDATA_RESERVA.Value    :=FormReserva.DateTimePicker1.Date;
- FormReserva.FDQryReservaHORA_RESERVA.Value    :=FormReserva.TimePicker1.Time;
- FormReserva.FDQryReservaHORA_FIM_RESERVA.Value:=FormReserva.TimePicker2.Time;
-  Data        := DateToStr(Date);
-  hora        := TimeToStr(Time);
-  horafim     := TimeToStr(Time);
+  // Data := FormReserva.cxDBDate_rsv.Text;
+  FormReserva.FDQryReservaDATA_RESERVA.Value :=FormReserva.DateTimePicker1.Date;
+  FormReserva.FDQryReservaHORA_RESERVA.Value := FormReserva.TimePicker1.Time;
+  FormReserva.FDQryReservaHORA_FIM_RESERVA.Value :=FormReserva.TimePicker2.Time;
+  Data := DateToStr(Date);
+  hora := TimeToStr(Time);
+  horafim := TimeToStr(Time);
 
   // FDQryPesquisa parametros para consultar no banco .........
   FDQryPesquisa.Close;
@@ -85,13 +83,13 @@ begin
   FDQryPesquisa.SQL.Add('hora_fim_reserva =    :phorafim');
 
   FDQryPesquisa.ParamByName('pmarca').AsString := (marca);
-  FDQryPesquisa.ParamByName('pdate').AsDate := StrToDate(Data);
-  FDQryPesquisa.ParamByName('phora').AsTime := StrToTime(hora);
-  FDQryPesquisa.ParamByName('phorafim').AsTime := StrToTime(horafim);
+  FDQryPesquisa.ParamByName('pdate').AsDate := StrToDate(DateToStr(FormReserva.DateTimePicker1.Date));
+  FDQryPesquisa.ParamByName('phora').AsTime := StrToTime(TimeToStr(FormReserva.TimePicker1.Time));
+  FDQryPesquisa.ParamByName('phorafim').AsTime := StrToTime(TimeToStr(FormReserva.TimePicker2.Time));
   FDQryPesquisa.Open();
 
- // Condição verdadeira para caso os valores retornem maior que 0
-  if FDQryPesquisa.RecordCount > 0 then
+  // Condição verdadeira para caso os valores retornem maior que 0
+  if FDQryPesquisa.RecordCount >0  then
   begin
     MessageDlg('Agendamento Encontrado!!', mtConfirmation, [mbOK], 0);
     FDTransaction.RollbackRetaining;
@@ -100,7 +98,7 @@ begin
     Close;
     Abort;
   end
- // Condição Falsa para caso os valores não retornem maior que 0
+  // Condição Falsa para caso os valores não retornem maior que 0
   else if FDQryReserva.State in [dsEdit, dsInsert] then
   begin
     FDTransaction.StartTransaction;
@@ -110,8 +108,6 @@ begin
     FDTransaction.Free;
   end;
   exit;
-  Close;
-
 
 
 end;
@@ -130,7 +126,6 @@ begin
   finally
     FDQryReserva.SQL.Clear;
     Close;
-
 
   end;
 
