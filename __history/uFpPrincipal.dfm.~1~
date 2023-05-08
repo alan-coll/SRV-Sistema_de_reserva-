@@ -26,9 +26,8 @@ object FormPrincipal: TFormPrincipal
       Top = 0
       Width = 75
       Height = 57
-      Caption = 'Novo Agendamento'
+      Caption = 'Novo'
       TabOrder = 0
-      WordWrap = True
       OnClick = BtnNovoClick
     end
     object BtnGravar: TButton
@@ -36,7 +35,7 @@ object FormPrincipal: TFormPrincipal
       Top = 0
       Width = 75
       Height = 57
-      Caption = 'Agendar'
+      Caption = 'Gravar'
       TabOrder = 1
     end
     object BtnCancel: TButton
@@ -44,10 +43,9 @@ object FormPrincipal: TFormPrincipal
       Top = 0
       Width = 75
       Height = 57
-      Caption = 'Cancelar agendamento'
+      Caption = 'Cancel'
       TabOrder = 2
       Visible = False
-      WordWrap = True
       OnClick = BtnCancelClick
     end
   end

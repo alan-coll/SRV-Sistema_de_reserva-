@@ -66,8 +66,8 @@ var
 begin
   marca := FormReserva.DBComboBox1.Text;
   // Data := FormReserva.cxDBDate_rsv.Text;
-  FormReserva.FDQryReservaDATA_INICIO_RESERVA.Value :=FormReserva.DateTimePicker1.Date;
-  FormReserva.FDQryReservaHORA_INICIO_RESERVA.Value := FormReserva.TimePicker1.Time;
+  FormReserva.FDQryReservaDATA_RESERVA.Value :=FormReserva.DateTimePicker1.Date;
+  FormReserva.FDQryReservaHORA_RESERVA.Value := FormReserva.TimePicker1.Time;
   FormReserva.FDQryReservaHORA_FIM_RESERVA.Value :=FormReserva.TimePicker2.Time;
   Data := DateToStr(Date);
   hora := TimeToStr(Time);
