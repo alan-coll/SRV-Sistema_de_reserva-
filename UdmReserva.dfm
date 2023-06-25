@@ -1,5 +1,4 @@
 object DmReserva: TDmReserva
-  OldCreateOrder = False
   OnCreate = DataModuleCreate
   Height = 269
   Width = 485
@@ -17,7 +16,6 @@ object DmReserva: TDmReserva
       'DriverID=FB')
     TxOptions.StopOptions = [xoIfCmdsInactive, xoIfAutoStarted, xoFinishRetaining]
     ConnectedStoredUsage = [auDesignTime]
-    Connected = True
     LoginPrompt = False
     Left = 32
     Top = 88

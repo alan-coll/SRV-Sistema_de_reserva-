@@ -10,9 +10,7 @@ object FormPrincipal: TFormPrincipal
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   Visible = True
-  PixelsPerInch = 96
   TextHeight = 13
   object Pn1: TPanel
     Left = 0
@@ -21,6 +19,7 @@ object FormPrincipal: TFormPrincipal
     Height = 65
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 659
     object BtnNovo: TButton
       Left = 0
       Top = 0
