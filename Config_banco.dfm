@@ -11,9 +11,7 @@ object Config_bd: TConfig_bd
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  OldCreateOrder = False
   OnClose = FormClose
-  PixelsPerInch = 96
   TextHeight = 13
   object lblcaminho: TLabel
     Left = 4

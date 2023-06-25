@@ -42,8 +42,9 @@ begin
   if Opnpastas.Execute then
   begin
     EdtCaminhobanco.Text := Opnpastas.FileName;
-    vfilename := ExtractFilePath(Application.ExeName) + 'Reserva_Veiculos.ini';
+    vfilename := ExtractFilePath(Application.ExeName) + 'SRV.ini';
     SetValorIni(vfilename, 'Configuracao', 'Caminho_db', EdtCaminhobanco.Text);
+
     ShowMessage('Caminho configurado com Sucesso!!!');
     Application.Terminate;
     Self.Close;
